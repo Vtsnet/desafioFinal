@@ -12,7 +12,6 @@ const authorization = async (req, res, next) => {
         if (!authorization) {
             return respondWithError(res, 401, 'Não autorizado');
         }
-
         const token = authorization.replace('Bearer ', '').trim();
         const { id } = jwt.verify(token, process.env.JWT);
 
