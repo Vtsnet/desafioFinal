@@ -14,7 +14,7 @@ const s3 = new aws.S3({
 const uploadFile = async (path, buffer, mimetype) => {
 
     const file = await s3.upload({
-        Bucket: process.env.KEY_NAME,
+        Bucket: process.env.BACKBLAZE.BUCKET,
         Key: path,
         Body: buffer,
         ContentType: mimetype
@@ -30,7 +30,7 @@ const uploadFile = async (path, buffer, mimetype) => {
 
 const deletArchives = async (path) => {
     await s3.deleteObject({
-        Bucket: process.env.KEY_NAME,
+        Bucket: process.env.BACKBLAZE_BUCKET,
         Key: path
     }).promise();
 };
