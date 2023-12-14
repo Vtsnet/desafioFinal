@@ -11,7 +11,12 @@ const cadastrarUsuario = async (req, res) => {
         if (!newUser) {
             return res.status(400).json({ mensagem: 'O usuário não foi cadastrado.' });
         };
+        const html = await htmlCompiler('./src/templates/email.html', {
+            nomeUsuario: nome,
+        });
 
+        await send(email, html);
+        
         return res.status(201).json(newUser[0]);
     } catch (erro) {
         return res.status(500).json({ mensagem: "Erro interno do servidor" });
